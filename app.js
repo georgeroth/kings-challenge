@@ -80,7 +80,7 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
         }
       })
 
-      console.log(monarchNamesOccurence)
+      console.log("I still need to write the logic to check the highest occurence for a particular name. So far we have this array", monarchNamesOccurence)
 
       // The below works but I don't get it
       //
