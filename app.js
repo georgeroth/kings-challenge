@@ -15,7 +15,7 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
           }
       })
 
-      console.log(`There are ${monarchNameList.length} monarchs in the list.`)
+      console.log(`1. There are ${monarchNameList.length} monarchs in the list.`)
 
     // 2. Which monarch ruled the longest (and for how long)?
 
@@ -33,7 +33,7 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
           }
       })
 
-      console.log(`The longest ruling Monarch was (or were if there is a tie) ${longestRulingMonarchNameList}. They ruled for ${longestRulingMonarchLength} years.`)
+      console.log(`2. The longest ruling Monarch was (or were if there is a tie) ${longestRulingMonarchNameList}. They ruled for ${longestRulingMonarchLength} years.`)
 
     // 3. Which house ruled the longest (and for how long)?
 
@@ -62,7 +62,7 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
           longestRulingHouseName = house.nm
         }
       })
-      console.log(`The longest ruling house is ${longestRulingHouseName}. They ruled for a whopping ${longestRulingHouseLength} years.`)
+      console.log(`3. The longest ruling house is ${longestRulingHouseName}. They ruled for a whopping ${longestRulingHouseLength} years.`)
 
     // 4. What was the most common first name?
 
@@ -80,7 +80,7 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
         }
       })
 
-      console.log(monarchNamesOccurence)
+      console.log("4. I still need to write the logic to check the highest occurence for a particular name. So far we have this array", monarchNamesOccurence)
 
       // The below works but I don't get it
       //
