@@ -23,17 +23,7 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
       let longestRulingMonarchLength = 0
 
       monarchData.forEach(monarch => {
-          const rulingYears = monarch.yrs.split("-")
-          let rulingLength = 0
-          
-          if (rulingYears.length == 1) { // If someone has only a starting date it means they only ruled for 1 year
-            rulingLength = 1
-          } else if (rulingYears[1] == "") { // If someone has an empty ending date it means they are currently ruling, let's calculate from current year
-            const d = new Date();
-            rulingLength = d.getFullYear()-rulingYears[0]
-          } else { // Otherwise just calculate ruling years by subtracting rule start from rule end
-            rulingLength = rulingYears[1]-rulingYears[0]
-          }
+        let rulingLength = rulingLengthCalculator(monarch)
 
           if (rulingLength > longestRulingMonarchLength) { // If someone has ruled longer, we set the length and reset the names list to have only them.
             longestRulingMonarchLength = rulingLength
@@ -52,17 +42,7 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
       let longestRulingHouseLength = 0
 
       monarchData.forEach(monarch => {
-        const rulingYears = monarch.yrs.split("-")
-        let rulingLength = 0
-
-        if (rulingYears.length == 1) { // If someone has only a starting date it means they only ruled for 1 year
-          rulingLength = 1
-        } else if (rulingYears[1] == "") { // If someone has an empty ending date it means they are currently ruling, let's calculate from current year
-          const d = new Date();
-          rulingLength = d.getFullYear()-rulingYears[0]
-        } else { // Otherwise just calculate ruling years by subtracting rule start from rule end
-          rulingLength = rulingYears[1]-rulingYears[0]
-        }
+        const rulingLength = rulingLengthCalculator(monarch)
 
         const singleHouseAndLength = { // Preparing a single object to add to the array
           nm: monarch.hse,
@@ -83,4 +63,44 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
         }
       })
       console.log(`The longest ruling house is ${longestRulingHouseName}. They ruled for a whopping ${longestRulingHouseLength} years.`)
+
+    // 4. What was the most common first name?
+
+      const monarchFirstNameList = monarchData.map(monarch => {
+        return monarch.nm.split(" ")[0]
+      })
+
+      let monarchNamesOccurence = []
+
+      monarchFirstNameList.forEach(nameInList => {
+        if (!monarchNamesOccurence.find((e) => e.nm == nameInList)) {
+          monarchNamesOccurence.push({nm: nameInList, oc: 1})
+        } else {
+          monarchNamesOccurence[monarchNamesOccurence.findIndex((e) => e.nm == nameInList)].oc++
+        }
+      })
+
+      console.log(monarchNamesOccurence)
+
+      // The below works but I don't get it
+      //
+      // const mostCommonName = monarchFirstNameList.sort((a, b) =>
+      //       monarchFirstNameList.filter(v => v===a).length
+      //     - monarchFirstNameList.filter(v => v===b).length
+      //   ).pop();
+      //
+      // console.log(mostCommonName)
 })
+
+function rulingLengthCalculator(monarch) {
+  const rulingYears = monarch.yrs.split("-")
+  
+  if (rulingYears.length == 1) { // If someone has only a starting date it means they only ruled for 1 year
+    return 1
+  } else if (rulingYears[1] == "") { // If someone has an empty ending date it means they are currently ruling, let's calculate from current year
+    const d = new Date();
+    return d.getFullYear()-rulingYears[0]
+  } else { // Otherwise just calculate ruling years by subtracting rule start from rule end
+    return rulingYears[1]-rulingYears[0]
+  }
+}
