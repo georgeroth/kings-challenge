@@ -9,12 +9,10 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
 
     // 1. How many monarchs are there in the list?
 
-    // A monarch might sneakily come back to rule again after they stepped down, so let's make sure they don't count them twice
-
       let monarchNameList = []
 
       monarchData.forEach(monarch => {
-        if (!monarchNameList.includes(monarch.nm)) {
+        if (!monarchNameList.includes(monarch.nm)) { // A monarch might sneakily come back to rule again after they stepped down, so let's make sure we don't count them twice
             monarchNameList.push(monarch.nm)
           }
       })
