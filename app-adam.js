@@ -35,7 +35,22 @@ function solve(monarchsResponse) {
     });
   console.log("3. Longest ruling house: " + longestRulingHouse.houseName + "; ruled for " + longestRulingHouse.houseRuledFor + " years");
 
- 
+  // 4
+  const firstNameCountMap = monarchs.map(m => m.name.split(" ")[0]).reduce((map, name) => {
+    const count = map.has(name) ? map.get(name) + 1 : 1;
+    map.set(name, count);
+    return map;
+  }, new Map());
+  const mostCommonFirstName = [...firstNameCountMap]
+    .reduce((acc, val) => acc[1] > val[1] ? acc : val, ["", 0]);
+  console.log("4. Most common first name: " + mostCommonFirstName[0]);
+
+  // 4 alternative - shorter but inefficient - we are sorting the whole thing but we only want to know the max
+  const mostCommonFirstName2 = [...Map.groupBy(monarchs.map(m => m.name.split(" ")[0]), firstName => firstName)]
+    .sort((a, b) => {
+      return a[1].length > b[1].length ? -1 : 1
+    })
+  console.log("4B. Most common first name: " + mostCommonFirstName2[0][0]);
 }
 
 
