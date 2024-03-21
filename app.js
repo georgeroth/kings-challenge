@@ -80,7 +80,15 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
         }
       })
 
-      console.log("4. I still need to write the logic to check the highest occurence for a particular name. So far we have this array", monarchNamesOccurence)
+      monarchNameReduced = monarchNamesOccurence.reduce((acc, v) => {
+        if (acc.oc < v.oc) {
+          return v
+        } else {
+          return acc
+        }
+      }, { oc: 0 })
+
+      console.log(`4. The most frequently occuring Monarch name is ${monarchNameReduced.nm}, it occurs ${monarchNameReduced.oc} times.`)
 
       // The below works but I don't get it
       //
