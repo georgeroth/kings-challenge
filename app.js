@@ -76,7 +76,7 @@ fetch('https://gist.githubusercontent.com/christianpanton/10d65ccef9f29de3acd49d
         if (!monarchNamesOccurence.find((e) => e.nm == nameInList)) {
           monarchNamesOccurence.push({nm: nameInList, oc: 1})
         } else {
-          monarchNamesOccurence[monarchNamesOccurence.findIndex((e) => e.nm == nameInList)].oc++
+          monarchNamesOccurence.find((e) => e.nm == nameInList).oc++
         }
       })
 
